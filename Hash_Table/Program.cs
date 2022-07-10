@@ -1,4 +1,4 @@
-﻿Console.WriteLine("1.uc1-Finding Frequency in sentence\n2.uc2-Finding Frequency in paragragh\n3.Remove word\nEnter your choice:");
+﻿Console.WriteLine("1.uc1-Finding Frequency in sentence\n2.uc2-Finding Frequency in paragragh\n3.uc3-Remove word\nEnter your choice:");
 int option = Convert.ToInt32(Console.ReadLine());
 switch (option)
 {
@@ -42,6 +42,38 @@ switch (option)
         foreach (string key in dist)
         {
             Console.WriteLine($"{key,20} | {map.GetValue(key),10}");
+        }
+        break;
+    case 3:
+        string phrase1 = "Paranoids are not paranoid because they are paranoid but because they keep putting themselves deliberately into paranoid avoidable situations";
+        string[] words1 = phrase1.ToLower().Split(" ");
+        var dist1 = words1.Distinct();
+        int length1 = 0;
+        foreach (var word in dist1)
+            length1++;
+        Hash_Table.MyMapNode<string, int> map1 = new Hash_Table.MyMapNode<string, int>(length1);
+        int count1 = 1;
+        foreach (string word in words1)
+        {
+            if (word == "avoidable")
+            {
+                continue;
+            }
+            else if (map1.ContainsKey(word))
+            {
+                count = map1.GetValue(word) + 1;
+                map1.Remove(word);
+                map1.add(word, count);
+            }
+            else
+            {
+                map1.add(word, 1);
+            }
+        }
+        Console.WriteLine("Frequency-->Count");
+        foreach (string key in dist1)
+        {
+            Console.WriteLine(key + "-->" + map1.GetValue(key));
         }
         break;
 }
